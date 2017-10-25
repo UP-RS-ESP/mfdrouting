@@ -3,8 +3,8 @@
 This Python 3 module implements the Multiple Flow Direction (MFD) flow routing
 as proposed by [Freeman (1991)][id1]. As suggested by Freeman the free
 parameter p, the exponent that scales the fractions of flows, is tuned to the
-divergent flows of cones with p = 1.1.  It is written in C and based on the
-code by [Pelletier (2008)][id2].
+divergent flows of cones with p = 1.1, but can optionally be specified. It is
+written in C and based on the code by [Pelletier (2008)][id2].
 
 ## Install
 
