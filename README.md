@@ -15,9 +15,29 @@ written in C and based on the code by [Pelletier (2008)][id2].
 ## Usage
 
     import numpy as np
-    import gdal
     import mfdrouting
-    from matplotlib import pyplot as pl
+    help(mfdrouting)
+
+will show:
+
+    SCA(z, cellwidth, exponent = 1.1)
+    Returns the specific catchment area of the topography (DEM) in z.
+
+    Parameters
+    ----------
+    z : array_like
+        A 2-D array containing the elevations of the topography (DEM).
+    cellwidth : float
+        The cell width of the grid in meters.
+    exponent : float, optional
+        The exponent determining the flow divergence in relation to the slope.
+        See http://dx.doi.org/10.1016/0098-3004(91)90048-i.
+
+    Returns
+    -------
+    a : ndarray
+        The specific catchment area matrix on the same grid as z (DEM).
+    
 
 [id1]: http://dx.doi.org/10.1016/0098-3004(91)90048-i "Calculating catchment area with divergent flow based on a regular grid. T. Graham Freeman, Computers & Geosciences (1991)."
 
