@@ -37,7 +37,16 @@ will show:
     -------
     a : ndarray
         The specific catchment area matrix on the same grid as z (DEM).
-    
+
+## Bugs
+
+In case you receive a segmentation fault it is likely that the cause is a stack overflow.
+Please try running your Python scripts in a shell with an unlimited stack size. On Linux
+run
+
+    $ ulimit -s unlimited
+
+in your shell of choice.
 
 [id1]: http://dx.doi.org/10.1016/0098-3004(91)90048-i "Calculating catchment area with divergent flow based on a regular grid. T. Graham Freeman, Computers & Geosciences (1991)."
 
