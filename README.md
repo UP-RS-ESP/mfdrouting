@@ -40,6 +40,8 @@ will show:
 
 ## Bugs
 
+The in-build sink-filling routine is not able to handle NaN values or negative elevations.
+
 In case you receive a segmentation fault it is likely that the cause is a stack overflow.
 Please try running your Python scripts in a shell with an unlimited stack size. On Linux
 run
