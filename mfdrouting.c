@@ -2,7 +2,6 @@
 #include "numpy/arrayobject.h"
 #include <fcntl.h>
 #include <math.h>
-#include <omp.h>
 #include <sys/param.h>
 
 #define VERSION "0.1"
