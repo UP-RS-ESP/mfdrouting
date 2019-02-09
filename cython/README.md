@@ -16,7 +16,7 @@ written in C and based on the code by [Pelletier (2008)][id2].
 
     import numpy as np
     import mfd
-    help(mfd)
+    help(mfd.sca)
 
 will show:
 
