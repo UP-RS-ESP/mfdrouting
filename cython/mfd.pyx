@@ -8,7 +8,7 @@ cdef extern from "cmfd.c":
         const int xlen, const int ylen,
         const double w, const double ppexp);
 
-def sca(const double[:,:] dem, const double cellwidth, const double pexp = 1.1):
+def sca(double[:,:] dem, const double cellwidth, const double pexp = 1.1):
     """
     sca(dem, cellwidth, exponent = 1.1)
 
@@ -41,10 +41,12 @@ def sca(const double[:,:] dem, const double cellwidth, const double pexp = 1.1):
     cdef unsigned int n, m
 
     # NaN value mask
-    mask = dem == np.nan
-    emin = dem[~mask].min()
-    dem -= emin
-    dem[mask] = 0
+    ndem = np.asarray(dem)
+    mask = np.isnan(ndem)
+    emin = ndem[~mask].min()
+    ndem -= emin
+    ndem += 1
+    ndem[mask] = 0
 
     # Numpy output array
     n, m = dem.shape[0], dem.shape[1]
@@ -54,6 +56,11 @@ def sca(const double[:,:] dem, const double cellwidth, const double pexp = 1.1):
     # C call
     mfdtda(&mv[0,0], &dem[0,0],
             m, n, cellwidth, pexp)
+
+    # recover dem nans
+    ndem += emin
+    ndem -= 1
+    ndem[mask] = np.nan
 
     # TDA -> SCA
     out /= cellwidth
