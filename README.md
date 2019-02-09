@@ -13,6 +13,8 @@ It is written in C and based on the code by [Pelletier (2008)][id2].
 	cd mfdrouting
 	sudo python3 setup.py install
 
+Alternatively, use the Cython version in the [cython](cython/) folder.
+
 ## Usage
 
     import numpy as np
@@ -41,11 +43,16 @@ will show:
 
 ## Bugs
 
-The in-build sink-filling routine is not able to handle NaN values or negative elevations.
+The in-build sink-filling routine is not able to handle NaN
+values or negative elevations.  However, the Cython version
+converts all elevations so that the lowest is zero and
+converts NaN values to zeros. After flow accumulation NaN
+values are filled back in.
 
-In case you receive a segmentation fault it is likely that the cause is a stack overflow.
-Please try running your Python scripts in a shell with an unlimited stack size. On Linux
-run
+In case you receive a segmentation fault it is likely that
+the cause is a stack overflow.  Please try running your
+Python scripts in a shell with an unlimited stack size. On
+Linux run
 
     $ ulimit -s unlimited
 
