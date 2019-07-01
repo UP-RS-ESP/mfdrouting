@@ -8,7 +8,7 @@ cdef extern from "cmfd.c":
         const int xlen, const int ylen,
         const double w, const double ppexp);
 
-def sca(double[:,:] dem, const double cellwidth, const double pexp = 1.1):
+def sca(dem, const double cellwidth, const double pexp = 1.1):
     """
     sca(dem, cellwidth, exponent = 1.1)
 
@@ -37,7 +37,7 @@ def sca(double[:,:] dem, const double cellwidth, const double pexp = 1.1):
     a : ndarray
         The specific catchment area Numpy array on the same grid.
     """
-    cdef double[:, :] mv
+    cdef double[:, :] dv, av
     cdef unsigned int n, m
 
     # NaN value mask
@@ -47,14 +47,15 @@ def sca(double[:,:] dem, const double cellwidth, const double pexp = 1.1):
     ndem -= emin
     ndem += 1
     ndem[mask] = 0
+    dv = ndem
 
     # Numpy output array
-    n, m = dem.shape[0], dem.shape[1]
+    n, m = ndem.shape[0], ndem.shape[1]
     out = np.zeros((n, m))
-    mv = out
+    av = out
 
     # C call
-    mfdtda(&mv[0,0], &dem[0,0],
+    mfdtda(&av[0,0], &dv[0,0],
             m, n, cellwidth, pexp)
 
     # recover dem nans
